@@ -45,7 +45,6 @@ button.addEventListener("click", () => {
 
   localStorage.setItem("time", message.textContent);
   localStorage.setItem("buttonState", button.textContent);
-  localStorage.setItem("backgroundColor", document.body.style.backgroundColor);
 });
 
 // Виводимо зі стореджу останній час виконання події
