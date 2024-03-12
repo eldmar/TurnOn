@@ -7,16 +7,22 @@ const message = document.querySelector(".message");
 const item = localStorage.getItem("time");
 const savedButtonState = localStorage.getItem("buttonState");
 
+// Функія додавання 0 , якщо дата менше 10
+
+function addZero(number) {
+  return number < 10 ? "0" + number : number;
+}
+
 // Дізнаємось поточну дату
 
 function currentTime() {
   const time = new Date();
-  const day = time.getDate();
-  const month = (time.getMonth() + 1).toString().padStart(2, "0");
-  const year = time.getFullYear();
-  const hours = time.getHours();
-  const minutes = time.getMinutes();
-  const seconds = time.getSeconds();
+  const day = addZero(time.getDate());
+  const month = addZero(time.getMonth() + 1);
+  const year = addZero(time.getFullYear());
+  const hours = addZero(time.getHours());
+  const minutes = addZero(time.getMinutes());
+  const seconds = addZero(time.getSeconds());
   const correctTime = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
   return correctTime;
 }
@@ -47,7 +53,7 @@ button.addEventListener("click", () => {
 if (item !== null) {
   message.textContent = `${item}`;
 
-  if (savedButtonState === "Turn on") {
+  if (savedButtonState === "Turn off") {
     body.classList.add("active-body");
     button.classList.toggle("active-button");
     message.classList.add("message-active");
