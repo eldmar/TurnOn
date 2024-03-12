@@ -6,21 +6,18 @@ const message = document.querySelector(".message");
 
 const item = localStorage.getItem("time");
 const savedButtonState = localStorage.getItem("buttonState");
-const savedBackgroundColor = localStorage.getItem("backgroundColor");
 
 // Дізнаємось поточну дату
 
 function currentTime() {
   const time = new Date();
   const day = time.getDate();
-  const month = time.getMonth();
+  const month = (time.getMonth() + 1).toString().padStart(2, "0");
   const year = time.getFullYear();
   const hours = time.getHours();
   const minutes = time.getMinutes();
   const seconds = time.getSeconds();
-  const correctTime = `${day}-${
-    month + 1
-  }-${year} ${hours}:${minutes}:${seconds}`;
+  const correctTime = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
   return correctTime;
 }
 
@@ -49,5 +46,13 @@ button.addEventListener("click", () => {
 
 if (item !== null) {
   message.textContent = `${item}`;
-  document.body.style.backgroundColor = savedBackgroundColor;
+
+  if (savedButtonState === "Turn on") {
+    body.classList.add("active-body");
+    button.classList.toggle("active-button");
+    message.classList.add("message-active");
+    button.textContent = "Turn on";
+  }
 }
+
+console.log(savedButtonState);
